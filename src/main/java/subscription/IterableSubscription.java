@@ -8,6 +8,7 @@ public class IterableSubscription<T> implements Subscription {
 
     private final List<T> items;
     private final Subscriber<T> subscriber;
+    private long index = 0L;
 
     public IterableSubscription(List<T> items, Subscriber<T> subscriber) {
         this.items = items;
@@ -16,8 +17,18 @@ public class IterableSubscription<T> implements Subscription {
 
     @Override
     public void request(long n) {
-        items.forEach(subscriber::onNext);
-        subscriber.onComplete();
+        for (long i = index; i < n; i++) {
+            if (i > items.size() - 1) {
+                break;
+            }
+            //TODO: Add collection that can store LONG.MAX_VALUE items
+            subscriber.onNext(items.get((int) i));
+        }
+
+        index = n;
+        if (index > items.size() - 1) {
+            subscriber.onComplete();
+        }
     }
 
     @Override
