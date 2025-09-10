@@ -5,7 +5,7 @@ import subscription.IterableSubscription;
 
 import java.util.List;
 
-public class IterablePublisher<T> implements Publisher<T>{
+public class IterablePublisher<T> implements Publisher<T> {
 
     private final List<T> items;
 

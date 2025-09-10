@@ -1,3 +1,4 @@
+import publisher.FilterPublisher;
 import publisher.IterablePublisher;
 import publisher.MapPublisher;
 import publisher.Publisher;
@@ -9,7 +10,9 @@ public class Demo {
     public static void main(String[] args) {
         IterablePublisher<Integer> iterablePublisher = new IterablePublisher<>(List.of(1, 2, 3, 4, 5));
 
-        Publisher<String>  mapped = new MapPublisher<>(iterablePublisher, i -> "NUmber " + i);
+        Publisher<Integer> filtered = new FilterPublisher<>(iterablePublisher, i -> i % 2 == 0);
+
+        Publisher<String> mapped = new MapPublisher<>(filtered, i -> "Number " + i);
         mapped.subscribe(new PrintSubscriber<>());
     }
 }
