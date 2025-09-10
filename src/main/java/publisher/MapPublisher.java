@@ -1,6 +1,7 @@
 package publisher;
 
 import subscriber.Subscriber;
+import subscription.MapSubscription;
 
 import java.util.function.Function;
 
@@ -16,6 +17,6 @@ public class MapPublisher<T, R> implements Publisher<R> {
 
     @Override
     public void subscribe(Subscriber<R> subscriber) {
-        subscriber.onSubscribe(new MapSubscription<>(publisher, subscriber, mapper));
+        new MapSubscription<>(publisher, subscriber, mapper);
     }
 }
