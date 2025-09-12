@@ -14,7 +14,7 @@ public class TaskSubscription<T> implements Subscription, Subscriber<T> {
     public TaskSubscription(Publisher<T> publisher, Subscriber<T> downstream, long limit) {
         this.downstream = downstream;
         this.limit = limit;
-        publisher.subscribe(this.downstream);
+        publisher.subscribe(this);
     }
 
     @Override
