@@ -47,6 +47,6 @@ public class MapSubscription<T, R> implements Subscription, Subscriber<T> {
 
     @Override
     public void cancel() {
-
+        upstream.cancel();
     }
 }

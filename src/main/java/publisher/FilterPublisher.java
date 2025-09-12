@@ -17,6 +17,6 @@ public class FilterPublisher<T> implements Publisher<T> {
 
     @Override
     public void subscribe(Subscriber<T> subscriber) {
-        new FilterSubscription(publisher, subscriber, predicate);
+        new FilterSubscription<>(publisher, subscriber, predicate);
     }
 }

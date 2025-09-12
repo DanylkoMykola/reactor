@@ -33,6 +33,5 @@ public class IterableSubscription<T> implements Subscription {
 
     @Override
     public void cancel() {
-
     }
 }
