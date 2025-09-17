@@ -1,9 +1,12 @@
 package publisher;
 
+import subscriber.AsyncSubscriber;
 import subscriber.PrintSubscriber;
 import subscriber.Subscriber;
+import subscription.Subscription;
 
 import java.util.List;
+import java.util.concurrent.Executor;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -39,4 +42,13 @@ public class Mono<T> implements Publisher<T> {
     public Mono<T> take(long n) {
         return new Mono<>(new TakePublisher<>(source, n));
     }
+
+    public Mono<T> subscribeOn(Executor executor) {
+        return new Mono<>(subscriber -> executor.execute(() -> source.subscribe(subscriber)));
+    }
+
+    public Mono<T> publishOn(Executor executor) {
+        return new Mono<>(subscriber -> source.subscribe(new AsyncSubscriber<T>(subscriber, executor)));
+    }
+
 }
