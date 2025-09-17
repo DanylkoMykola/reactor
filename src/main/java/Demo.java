@@ -1,6 +1,7 @@
 import publisher.FilterPublisher;
 import publisher.IterablePublisher;
 import publisher.MapPublisher;
+import publisher.Mono;
 import publisher.Publisher;
 import publisher.TakePublisher;
 import subscriber.PrintSubscriber;
@@ -17,5 +18,7 @@ public class Demo {
 
         TakePublisher<Integer> takePublisher = new TakePublisher<>(iterablePublisher, 3);
         takePublisher.subscribe(new PrintSubscriber<>());
+
+        Mono.just(10).subscribe();
     }
 }
